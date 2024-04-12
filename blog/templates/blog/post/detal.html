@@ -7,4 +7,24 @@
     Opublikowano{{ post.publish }} przez {{ post.author }}
     </p>
     {{ post.body|linebreaks }}
+
+    <h2>
+    {{ coments.count }} komentarz{{ coments.count|pluralize:"y" }}
+    </h2>
+    {% for coment in coments %}
+        <div>
+            <p class="info">
+                Komentarz{{ forloop.counter }} dodany pszez {{ coment.email }}{{ coment.created }}
+            </p>
+            {{ coment.body|linebreaks }}
+    	</div>
+        {% empty %}
+        <p>nie dodano jeszcze rzadnych danychs</p>
+    {% endfor %}
+    <h2>dodaj nowy komentarz</h2>
+    <form action="" method="post">
+        {{ coment_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="dodaj Komentarz"></p>
+    </form>
 {% endblock %}
